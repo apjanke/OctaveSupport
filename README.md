@@ -1,10 +1,10 @@
-OctaveSupport for Sublime Text
-===============================
+OctaveSupport for Sublime Text 3
+================================
 
 OctaveSupport package for Sublime Text, providing syntax highlighting, indentation settings, and code snippets.
 
 I’m not really sure what I'm doing here, either with the package itself, or how to structure a Git repo for a redistributable Sublime package.
-I’m working on getting this into Package Control.
+I’m working on [getting this into Package Control](https://github.com/wbond/package_control_channel/pull/7517).
 
 ## Installation
 
@@ -15,7 +15,7 @@ For now, only installation from the Git repo is supported.
 * Link the source directory into your Sublime Text `Packages/User` directory
   * on macOS:
     * `cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User`
-    * `ln -s /path/to/my/cloned/sublime-octave/Octave.sublime-package .`
+    * `ln -s /path/to/my/cloned/sublime-octave Octave.sublime-package`
   * on Linux: You’ll need to find the Sublime Text data path yourself; I don’t know where it is
   * on Windows: Symlinks are not supported, so this won’t work. TBD.
 

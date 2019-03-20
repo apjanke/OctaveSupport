@@ -1,0 +1,338 @@
+%YAML 1.2
+---
+# http://www.sublimetext.com/docs/3/syntax.html
+name: Octave
+file_extensions:
+  - m
+first_line_match: '^#\![\S]*/octave\b'
+scope: source.octave
+variables:
+  id: '[A-Za-z_]\w*'
+contexts:
+  main:
+    - include: function
+    - include: brackets
+    - include: curlybrackets
+    - include: parens
+    - include: transpose
+    - include: string
+    - include: members
+    - include: all_octave_keywords
+    - include: all_octave_comments
+    - include: number
+    - include: operators
+    - include: variable
+    - include: variable_invalid
+    - include: not_equal_invalid
+    - include: variable_assignment
+  members:
+    - match: ({{id}})(\.)({{id}})
+      captures:
+        2: punctuation.accessor.dot.octave
+  all_octave_comments:
+    - match: (%%).*$\n?
+      scope: comment.double.percentage.octave
+      captures:
+        2: punctuation.definition.comment.octave
+    - match: '^\s*(%\{)\s*\n'
+      captures:
+        1: punctuation.definition.comment.octave
+      push:
+        - meta_scope: comment.block.percentage.octave
+        - match: '^\s*(%\})\s*$\n?'
+          captures:
+            1: punctuation.definition.comment.octave
+          pop: true
+    - match: (%).*$\n?
+      scope: comment.line.percentage.octave
+      captures:
+        1: punctuation.definition.comment.octave
+    - match: (#).*$\n?
+      scope: comment.line.hash.octave
+      captures:
+        1: punctuation.definition.comment.octave
+  all_octave_keywords:
+    - include: octave_keyword_control
+    - include: octave_keyword_operator
+    - include: octave_keyword_other
+    - include: octave_oop
+    - include: octave_storage_type
+    - include: octave_storage_modifier
+    - include: octave_constant_language
+    - include: octave_variable_function
+    - include: octave_keyword_desktop
+    - include: octave_keyword_mathematics
+    - include: octave_keyword_analysis
+    - include: octave_storage_control
+    - include: octave_support_graphics
+    - include: octave_support_function
+    - include: octave_support_external
+  allofem:
+    - include: parens
+    - include: curlybrackets
+    - include: end_in_parens
+    - include: brackets
+    - include: transpose
+    - include: string
+    - include: all_octave_keywords
+    - include: all_octave_comments
+    - include: variable
+    - include: variable_invalid
+    - include: number
+    - include: operators
+    - match: \.\.\.
+      scope: punctuation.separator.continuation.octave
+  brackets:
+    - match: '\['
+      scope: punctuation.section.brackets.begin.octave
+      push:
+        - meta_scope: meta.brackets.octave
+        - match: '\]'
+          scope: punctuation.section.brackets.end.octave
+          set: transpose_post_parens
+        - include: allofem
+  constants_override:
+    - match: '(^|\;)\s*(ans|inf|Inf|nan|NaN|eps|end)\s*=[^=]'
+      comment: The user is trying to override Octave constants and functions.
+      scope: meta.inappropriate.octave
+  curlybrackets:
+    - match: '\{'
+      scope: meta.brackets.curly.octave
+      push:
+        - meta_content_scope: meta.brackets.curly.octave
+        - match: '\}'
+          scope: meta.brackets.curly.octave
+          set: transpose_post_parens
+        - include: allofem
+        - include: end_in_parens
+  end_in_parens:
+    - match: \bend\b
+      comment: end as operator symbol
+      scope: keyword.operator.symbols.octave
+  escaped_quote:
+    - match: "''"
+      scope: constant.character.escape.octave
+
+  # Function
+  function:
+    - match: '^\s*(function)\b'
+      captures:
+        1 : keyword.other.octave
+      push:
+        - match: \b(\w+)\s+(=)
+          captures:
+            1: variable.parameter.output.function.octave
+            2: keyword.operator.assignment.octave
+        - match: '\['
+          scope: punctuation.section.brackets.octave
+          push:
+            - match: \b\w+\b
+              scope: variable.parameter.output.function.octave
+            - match: ','
+              scope: punctuation.separator.octave
+            - match: '\]'
+              scope: punctuation.section.brackets.octave
+              pop: true
+        - match: '(=)?\s*\b(\w+)\s*(\()'
+          captures:
+            1: keyword.operator.assignment.octave
+            2: entity.name.function.octave
+            3: punctuation.section.parens.begin.octave
+          set:
+            - meta_scope: meta.function.parameters.octave
+            - match: \b\w+\b
+              scope: variable.parameter.input.function.octave
+            - match: ','
+              scope: punctuation.separator.octave
+            - match: '\)'
+              scope: punctuation.section.parens.end.octave
+              pop: true
+        - match: \b(\w+)\s*(?=%|$)
+          captures:
+            1: entity.name.function.octave
+          pop: true
+
+  # Octave keywords
+  octave_constant_language:
+    - match: \b(ans|eps|false|Inf|inf|intmax|intmin|namelengthmax|NaN|nan|on|off|realmax|realmin|true|i|j|pi)\b
+      comment: octave constants
+      scope: constant.language.octave
+  octave_keyword_analysis:
+    - match: \b(abs|addevent|addsample|addsampletocollection|addts|angle|conv|conv2|convn|corrcoef|cov|cplxpair|ctranspose|cumtrapz|deconv|del2|delevent|delsample|delsamplefromcollection|detrend|diff|fft|fft2|fftn|fftshift|fftw|filter|filter2|getabstime|getdatasamplesize|getinterpmethod|getqualitydesc|getsampleusingtime|gettimeseriesnames|gettsafteratevent|gettsafterevent|gettsatevent|gettsbeforeatevent|gettsbeforeevent|gettsbetweenevents|gradient|idealfilter|ifft|ifft2|ifftn|ifftshift|iqr|max|mean|median|min|mldivide|mode|mrdivide|removets|resample|setabstime|setinterpmethod|settimeseriesnames|std|synchronize|timeseries|trapz|tscollection|tsdata.event|tsprops|tstool|var)\b
+      comment: Data Analysis
+      scope: keyword.analysis.octave
+  octave_keyword_control:
+    - match: \b(break|case|catch|continue|else|elseif|end|endclassdef|endfor|endfunction|endmethods|endproperties|endif|end_try_catch|end_unwind_protect|for|parfor|if|otherwise|pause|rethrow|return|start|startat|stop|switch|try|unwind_protect|unwind_protect_cleanup|wait|while)\b
+      comment: Control keywords
+      scope: keyword.control.octave
+  octave_keyword_desktop:
+    - match: \b(addpath|assignin|builddocsearchdb|cd|checkin|checkout|clc|clear|clipboard|cmopts|commandhistory|commandwindow|computer|copyfile|customverctrl|dbclear|dbcont|dbdown|dbquit|dbstack|dbstatus|dbstep|dbstop|dbtype|dbup|debug|demo|diary|dir|doc|docopt|docsearch|dos|echodemo|edit|exit|fileattrib|filebrowser|finish|format|genpath|getenv|grabcode|help|helpbrowser|helpwin|home|hostid|info|keyboard|license|lookfor|ls|octave|octaverc|octaveroot|memory|mkdir|mlint|mlintrpt|more|movefile|notebook|openvar|pack|partialpath|path|path2rc|pathdef|pathsep|pathtool|perl|playshow|prefdir|preferences|profile|profsave|publish|pwd|quit|recycle|rehash|restoredefaultpath|rmdir|rmpath|savepath|setenv|startup|support|system|toolboxdir|type|undocheckout|unix|ver|verctrl|verLessThan|version|web|what|whatsnew|which|winqueryreg|workspace)\b|(^\s*!.*$)
+      comment: Desktop Tools and Development
+      scope: keyword.desktop.octave
+  octave_keyword_mathematics:
+    - match: \b(accumarray|acos|acosd|acosh|acot|acotd|acoth|acsc|acscd|acsch|airy|amd|asec|asecd|asech|asin|asind|asinh|atan|atan2|atand|atanh|balance|besselh|besseli|besselj|besselk|bessely|beta|betainc|betaln|bicg|bicgstab|blkdiag|bsxfun|bvp4c|bvpget|bvpinit|bvpset|bvpxtend|cart2pol|cart2sph|cat|cdf2rdf|ceil|cgs|chol|cholinc|cholupdate|circshift|colamd|colperm|compan|complex|cond|condeig|condest|conj|convhull|convhulln|cos|cosd|cosh|cot|cotd|coth|cross|csc|cscd|csch|cumprod|cumsum|dblquad|dde23|ddeget|ddesd|ddeset|decic|det|deval|diag|disp|display|dmperm|dot|eig|eigs|ellipj|ellipke|erf|erfc|erfcinv|erfcx|erfinv|etree|etreeplot|exp|expint|expm|expm1|eye|factor|factorial|find|fix|flipdim|fliplr|flipud|floor|fminbnd|fminsearch|freqspace|full|funm|fzero|gallery|gamma|gammainc|gammaln|gcd|gmres|gplot|griddata|griddata3|griddatan|gsvd|hadamard|hankel|hess|hilb|horzcat|hypot|idivide|ilu|imag|ind2sub|Inf|inline|interp1|interp1q|interp2|interp3|interpft|interpn|inv|invhilb|ipermute|kron|lcm|ldl|legendre|length|linsolve|linspace|log|log10|log1p|log2|logm|logspace|lscov|lsqnonneg|lsqr|lu|luinc|magic|meshgrid|minres|mkpp|mod|NaN|nchoosek|ndgrid|ndims|nextpow2|nnz|nonzeros|norm|normest|nthroot|null|numel|nzmax|ode113|ode15i|ode15s|ode23|ode23s|ode23t|ode23tb|ode45|odefile|odeget|odeset|odextend|ones|optimget|optimset|ordeig|ordqz|ordschur|orth|pascal|pcg|pchip|pdepe|pdeval|perms|permute|pinv|planerot|pol2cart|poly|polyder|polyeig|polyfit|polyint|polyval|polyvalm|pow2|ppval|primes|prod|psi|qmr|qr|qrdelete|qrinsert|qrupdate|quad|quadl|quadv|qz|rand|randn|randperm|rank|rat|rats|rcond|real|reallog|realpow|realsqrt|rem|repmat|reshape|residue|roots|rosser|rot90|round|rref|rsf2csf|schur|sec|secd|sech|shiftdim|sign|sin|sind|sinh|size|sort|sortrows|spalloc|sparse|spaugment|spconvert|spdiags|speye|spfun|sph2cart|spline|spones|spparms|sprand|sprandn|sprandsym|sprank|spy|sqrt|sqrtm|squeeze|ss2tf|sub2ind|subspace|sum|svd|svds|symamd|symbfact|symmlq|symrcm|tan|tand|tanh|toeplitz|trace|treelayout|treeplot|tril|triplequad|triu|unmkpp|unwrap|vander|vectorize|vertcat|wilkinson|zeros)\b
+      comment: Mathematics
+      scope: keyword.mathematics.octave
+  octave_keyword_operator:
+    - match: \b(all|and|any|bitand|bitcmp|bitget|bitmax|bitor|bitset|bitshift|bitxor|eq|ge|gt|isa|isappdata|iscell|iscellstr|ischar|iscom|isdir|isempty|isequal|isequalwithequalnans|isevent|isfield|isfinite|isfloat|isglobal|ishandle|ishold|isinf|isinteger|isinterface|isjava|iskeyword|isletter|islogical|ismac|ismember|ismethod|isnan|isnumeric|isobject|ispc|ispref|isprime|isprop|isreal|isscalar|issorted|isspace|issparse|isstrprop|isstruct|isstudent|isunix|isvarname|isvector|le|lt|mislocked|or|ne|not|setxor|union|unique|xor)\b
+      comment: Operator keywords
+      scope: keyword.operator.octave
+  octave_keyword_other:
+    - match: \b(addOptional|addParamValue|addRequired|addtodate|arrayfun|assert|blanks|builtin|calendar|cell|celldisp|cellfun|cellplot|clock|cputime|createCopy|datatipinfo|date|datenum|datestr|datevec|dbmex|deal|deblank|depdir|depfun|echo|eomday|error|etime|eval|evalc|evalin|exist|feval|fieldnames|findstr|func2str|genvarname|getfield|global|inferiorto|inmem|intersect|intwarning|lasterr|lasterror|lastwarn|loadobj|lower|methods|methodsview|mex|mexext|mfilename|mlock|munlock|nargchk|nargoutchk|now|orderfields|parse|pcode|regexp|regexpi|regexprep|regexptranslate|rmfield|run|saveobj|setdiff|setfield|sprintf|sscanf|strcat|strcmp|strcmpi|strfind|strings|strjust|strmatch|strncmp|strncmpi|strread|strrep|strtok|strtrim|structfun|strvcat|subsasgn|subsindex|subsref|substruct|superiorto|swapbytes|symvar|tic|timer|timerfind|timerfindall|toc|typecast|upper|warning|weekday|who|whos)\b
+      comment: Other keywords
+      scope: keyword.other.octave
+  octave_storage_control:
+    - match: \b(addframe|ascii|audioplayer|audiorecorder|aufinfo|auread|auwrite|avifile|aviinfo|aviread|beep|binary|cdfepoch|cdfinfo|cdfread|cdfwrite|csvread|csvwrite|daqread|dlmread|dlmwrite|exifread|feof|ferror|fgetl|fgets|filehandle|filemarker|fileparts|filesep|fitsinfo|fitsread|fopen|fprintf|fread|frewind|fscanf|fseek|ftell|ftp|fullfile|fwrite|gunzip|gzip|hdf|hdf5|hdf5info|hdf5read|hdf5write|hdfinfo|hdfread|hdftool|imfinfo|importdata|imread|imwrite|lin2mu|load|memmapfile|mget|mmfileinfo|movie2avi|mput|mu2lin|multibandread|multibandwrite|open|rename|save|sendmail|sound|soundsc|tar|tempdir|tempname|textread|textscan|todatenum|uiimport|untar|unzip|urlread|urlwrite|wavfinfo|wavplay|wavread|wavrecord|wavwrite|winopen|wk1finfo|wk1read|wk1write|xlsfinfo|xlsread|xlswrite|xmlread|xmlwrite|xslt|zip)\b
+      comment: File I/O
+      scope: storage.control.octave
+  octave_storage_modifier:
+    - match: \b(base2dec|bin2dec|cast|cell2mat|cell2struct|cellstr|char|dec2base|dec2bin|dec2hex|hex2dec|hex2num|int2str|mat2cell|mat2str|num2cell|native2unicode|num2hex|num2str|persistent|str2double|str2func|str2mat|str2num|struct2cell|unicode2native)\b
+      comment: Storage modifiers
+      scope: storage.modifier.octave
+  octave_storage_type:
+    - match: \b(class|double|function|functions|input|inputname|inputParser|int16|int32|int64|int8|logical|single|struct|uint16|uint32|uint64|uint8)\b
+      comment: Storage types
+      scope: storage.type.octave
+  octave_support_external:
+    - match: \b(actxcontrol|actxcontrollist|actxcontrolselect|actxGetRunningServer|actxserver|addproperty|calllib|callSoapService|createClassFromWsdl|createSoapMessage|ddeadv|ddeexec|ddeinit|ddepoke|ddereq|ddeterm|ddeunadv|deleteproperty|enableservice|eventlisteners|events|Execute|GetCharArray|GetFullMatrix|GetVariable|GetWorkspaceData|import|instrcallback|instrfind|instrfindall|interfaces|invoke|javaaddpath|javaArray|javachk|javaclasspath|javaMethod|javaObject|javarmpath|libfunctions|libfunctionsview|libisloaded|libpointer|libstruct|loadlibrary|MaximizeCommandWindow|MinimizeCommandWindow|move|parseSoapResponse|PutCharArray|PutFullMatrix|PutWorkspaceData|readasync|record|registerevent|release|send|serial|serialbreak|stopasync|unloadlibrary|unregisterallevents|unregisterevent|usejava)\b
+      comment: External Interfaces
+      scope: support.external.octave
+  octave_support_function:
+    - match: \b(addpref|align|dialog|errordlg|export2wsdlg|getappdata|getpixelposition|getpref|ginput|guidata|guide|guihandles|helpdlg|inputdlg|inspect|listdlg|listfonts|menu|movegui|msgbox|openfig|printdlg|printpreview|questdlg|rmappdata|rmpref|selectmoveresize|setappdata|setpixelposition|setpref|textwrap|uibuttongroup|uicontextmenu|uicontrol|uigetdir|uigetfile|uigetpref|uimenu|uiopen|uipanel|uipushtool|uiputfile|uiresume|uisave|uisetcolor|uisetfont|uisetpref|uistack|uitoggletool|uitoolbar|uiwait|waitbar|waitfor|waitforbuttonpress|warndlg)\b
+      comment: Creating Graphical User Interfaces
+      scope: support.function.octave
+  octave_support_graphics:
+    - match: \b(alim|allchild|alpha|alphamap|ancestor|annotation|area|axes|axis|bar|bar3|bar3h|barh|box|brighten|camdolly|cameratoolbar|camlight|camlookat|camorbit|campan|campos|camproj|camroll|camtarget|camup|camva|camzoom|caxis|cla|clabel|clf|close|closereq|colorbar|colordef|colormap|colormapeditor|ColorSpec|comet|comet3|compass|coneplot|contour|contour3|contourc|contourf|contourslice|contrast|copyobj|curl|cylinder|daspect|datacursormode|datetick|delaunay|delaunay3|delaunayn|delete|diffuse|divergence|dragrect|drawnow|dsearch|dsearchn|ellipsoid|errorbar|ezcontour|ezcontourf|ezmesh|ezmeshc|ezplot|ezplot3|ezpolar|ezsurf|ezsurfc|feather|figure|figurepalette|fill|fill3|findall|findfigs|findobj|flow|fplot|frame2im|frameedit|gca|gcbf|gcbo|gcf|gco|get|getframe|graymon|grid|gtext|hgexport|hggroup|hgload|hgsave|hgtransform|hidden|hist|histc|hold|hsv2rgb|im2frame|im2java|image|imagesc|imformats|ind2rgb|inpolygon|interpstreamspeed|isocaps|isocolors|isonormals|isosurface|legend|light|lightangle|lighting|line|LineSpec|linkaxes|linkprop|loglog|makehgtform|material|mesh|meshc|meshz|movie|newplot|noanimate|opengl|orient|pan|pareto|patch|pbaspect|pcolor|peaks|pie|pie3|plot|plot3|plotbrowser|plotedit|plotmatrix|plottools|plotyy|polar|polyarea|print|printopt|propedit|propertyeditor|quiver|quiver3|rbbox|rectangle|rectint|reducepatch|reducevolume|refresh|refreshdata|reset|rgb2hsv|rgbplot|ribbon|rose|rotate|rotate3d|saveas|scatter|scatter3|semilogx|semilogy|set|shading|showplottool|shrinkfaces|slice|smooth3|specular|sphere|spinmap|stairs|stem|stem3|stream2|stream3|streamline|streamparticles|streamribbon|streamslice|streamtube|subplot|subvolume|surf|surf2patch|surface|surfc|surfl|surfnorm|tetramesh|texlabel|text|title|trimesh|triplot|trisurf|tsearch|tsearchn|view|viewmtx|volumebounds|voronoi|voronoin|waterfall|whitebg|xlabel|xlim|ylabel|ylim|zlabel|zlim|zoom)\b
+      comment: Graphics
+      scope: support.function.graphics.octave
+  octave_variable_function:
+    - match: \b(nargin|nargout|varargin|varargout)\b
+      comment: Octave special function parameter variables
+      scope: variable.other.function.octave
+
+  # OOP
+  octave_oop:
+    - match: \b(classdef)\b
+      scope: keyword.other.oop.octave
+      push:
+        - meta_scope: meta.classdef.octave
+        - match: \(
+          scope: punctuation.definition.properties.begin.octave
+          push:
+            - meta_scope: meta.properties.octave
+            - match: \)
+              scope: punctuation.definition.properties.end.octave
+              pop: true
+            - match: ','
+              scope: punctuation.separator.octave
+            - match: \b(Abstract|AllowedSubclasses|ConstructOnLoad|HandleCompatible|Hidden|InferiorClasses|Sealed)\s*(=)
+              captures:
+                1: variable.parameter.octave
+                2: keyword.operator.symbols.octave
+            - match: \b(false|true)\b
+              scope: constant.language.octave
+        - match : \b(\w+)\b(?:\s*(<)\s*(\w+))?
+          captures:
+            1: entity.name.class.octave
+            2: punctuation.definition.inheritance.octave
+            3: entity.other.inherited-class.octave
+          pop: true
+    - match: \b(properties)\s+(\()
+      captures:
+        1: keyword.other.oop.octave
+        2: punctuation.definition.properties.begin.octave
+      push:
+        - match: \)
+          scope: punctuation.definition.properties.end.octave
+          pop: true
+        - match: ','
+          scope: punctuation.separator.octave
+        - match: \b(AbortSet|Abstract|Access|Constant|Dependent|GetAccess|GetObservable|Hidden|NonCopyable|SetAccess|SetObservable|Transient)\s*(=)
+          captures:
+            1: variable.parameter.octave
+            2: keyword.operator.symbols.octave
+        - match: \b(false|true|public|protected|private)\b
+          scope: constant.language.octave
+    - match: \b(properties|events|enumeration)\b
+      scope: keyword.other.oop.octave
+
+  number:
+    - match: '\d*\.?\d+([eE][+-]?\d)?([0-9&&[^\.]])*(i|j)?\b'
+      comment: "Valid numbers: 1, .1, 1.1, .1e1, 1.1e1, 1e1, 1i, 1j, 1e2j"
+      scope: constant.numeric.octave
+  operators:
+    - match: \s*(==|~=|~|\!|\!=|>|>=|<|<=|=|&|&&|:|\||\|\||\+|-|\*|\.\*|/|\./|\\|\.\\|\^|\.\^)\s*
+      comment: Operator symbols
+      scope: keyword.operator.symbols.octave
+  parens:
+    - match: \(
+      scope: punctuation.section.parens.begin.octave
+      push:
+        - meta_scope: meta.parens.octave
+        - match: \)
+          scope: punctuation.section.parens.end.octave
+          # pop: true
+          set: transpose_post_parens
+        - include: allofem
+        - include: end_in_parens
+  special_characters:
+    - match: '((\%([\+\-0]?\d{0,3}(\.\d{1,3})?)(c|d|e|E|f|g|G|s|((b|t)?(o|u|x|X))))|\%\%|\\(b|f|n|r|t|\\))'
+      comment: Operator symbols
+      scope: constant.character.escape.octave
+
+  string:
+    - match: ''''
+      scope: punctuation.definition.string.begin.octave
+      push:
+        - meta_scope: string.quoted.single.octave
+        - match: '''(?=(\]|\)|\}|=|~|<|>|&|\||-|\+|\*|\.|\^|\||\s|;|:|,))'
+          scope: punctuation.definition.string.end.octave
+          pop: true
+        - include: escaped_quote
+        - include: unescaped_quote
+        - include: special_characters
+    - match: '"'
+      scope: punctuation.definition.string.begin.octave
+      push:
+        - meta_scope: string.quoted.double.octave
+        - match: '"'
+          scope: punctuation.definition.string.end.octave
+          pop: true
+
+  transpose:
+    - match: '\b({{id}})(\.?'')'
+      captures:
+        1 : meta.variable.other.valid.octave
+        2 : keyword.operator.transpose.octave
+  transpose_post_parens:
+    - match: '(\.?'')'
+      captures:
+        1 : keyword.operator.transpose.octave
+      pop: true
+    - match: ''
+      pop: true
+  unescaped_quote:
+    - match: "'(?=.)"
+      scope: invalid.illegal.unescaped-quote.octave
+  variable:
+    - match: '\b{{id}}\b'
+      comment: Valid variable. Added meta to disable highlighting
+      scope: meta.variable.other.valid.octave
+  variable_assignment:
+    - match: '=\s*\.{0,2}\s*;?\s*$\n?'
+      comment: Incomplete variable assignment.
+      scope: invalid.illegal.incomplete-variable-assignment.octave
+  variable_invalid:
+    - match: '\b(\d+[_a-df-zA-DF-Z])\w*\b'
+      comment: No variables or function names can start with a number.
+      scope: invalid.illegal.invalid-variable-name.octave
+
+
+
+
+
+
+
+
+
+

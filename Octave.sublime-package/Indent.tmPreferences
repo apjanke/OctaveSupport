@@ -8,7 +8,7 @@
 	<key>settings</key>
 	<dict>
 		<key>decreaseIndentPattern</key>
-		<string>^\s*\b(end|end(classdef|for|if|function|methods|properties|try_catch|unwind_protect)|catch|else|elseif|case|otherwise)\b</string>
+		<string>^\s*\b(end|end(classdef|for|if|function|methods|properties|_try_catch|_unwind_protect)|catch|else|elseif)\b</string>
 		<key>highlightPairs</key>
 		<array>
 			<array>

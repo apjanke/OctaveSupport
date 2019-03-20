@@ -23,7 +23,7 @@ I’m working on [getting this into Package Control](https://github.com/wbond/pa
 * Link the source directory into your Sublime Text `Packages/User` directory
   * on macOS:
     * `cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User`
-    * `ln -s /path/to/my/cloned/sublime-octave Octave.sublime-package`
+    * `ln -s /path/to/my/cloned/sublime-octave OctaveSupport.sublime-package`
   * on Linux: You’ll need to find the Sublime Text data path yourself; I don’t know where it is
   * on Windows: Symlinks are not supported, so this won’t work. TBD.
 

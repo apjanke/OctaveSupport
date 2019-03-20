@@ -162,7 +162,7 @@ contexts:
       comment: Data Analysis
       scope: keyword.analysis.octave
   octave_keyword_control:
-    - match: \b(break|case|catch|continue|else|elseif|end|endclassdef|endfor|endfunction|endmethods|endproperties|endif|end_try_catch|end_unwind_protect|for|parfor|if|otherwise|pause|rethrow|return|start|startat|stop|switch|try|unwind_protect|unwind_protect_cleanup|wait|while)\b
+    - match: \b(break|case|catch|continue|else|elseif|end|endclassdef|endfor|endenumeration|endevents|endfunction|endmethods|endproperties|endif|end_try_catch|end_unwind_protect|for|parfor|if|otherwise|pause|rethrow|return|start|startat|stop|switch|try|unwind_protect|unwind_protect_cleanup|wait|while)\b
       comment: Control keywords
       scope: keyword.control.octave
   octave_keyword_desktop:

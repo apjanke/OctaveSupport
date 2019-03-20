@@ -12,14 +12,14 @@ I’m working on [getting this into Package Control](https://github.com/wbond/pa
 
 * First, install [Package Control](https://packagecontrol.io/installation)
 * In Sublime Text, open the Command Palette (Cmd-Shift-P on Mac, Ctrl-Shift-P on Linux/Windows) and choose “Package Control: Add Repository”
-* Add `https://github.com/apjanke/sublime-octave`
+* Add `https://github.com/apjanke/OctaveSupport`
 * Open the Command Palette and choose “Package Control: Install Package”
-* Select `sublime-octave` from the package list
+* Select `OctaveSupport` from the package list
 
 ### Installing from GitHub repo
 
 * Clone the Git repo
-  * `git clone https://github.com/apjanke/sublime-octave`
+  * `git clone https://github.com/apjanke/OctaveSupport`
 * Link the source directory into your Sublime Text `Packages/User` directory
   * on macOS:
     * `cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User`

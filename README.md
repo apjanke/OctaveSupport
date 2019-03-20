@@ -8,7 +8,15 @@ I’m working on [getting this into Package Control](https://github.com/wbond/pa
 
 ## Installation
 
-For now, only installation from the Git repo is supported.
+### Installing with Package Control
+
+* First, install [Package Control](https://packagecontrol.io/installation)
+* In Sublime Text, open the Command Palette (Cmd-Shift-P on Mac, Ctrl-Shift-P on Linux/Windows) and choose “Package Control: Add Repository”
+* Add `https://github.com/apjanke/sublime-octave`
+* Open the Command Palette and choose “Package Control: Install Package”
+* Select `sublime-octave` from the package list
+
+### Installing from GitHub repo
 
 * Clone the Git repo
   * `git clone https://github.com/apjanke/sublime-octave`

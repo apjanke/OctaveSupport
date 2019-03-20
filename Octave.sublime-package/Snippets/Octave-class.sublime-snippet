@@ -40,7 +40,8 @@ classdef $1
 
 	endmethods
 
-endclassdef]]></content>
+endclassdef
+]]></content>
   <tabTrigger>octclass</tabTrigger>
   <scope>source.matlab, source.octave</scope>
   <description>Octave classdef</description>

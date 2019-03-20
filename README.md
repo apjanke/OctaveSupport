@@ -30,6 +30,8 @@ You may also want to do View > Syntax > "Open all with current extension as..." 
 To use the code snippets, type one of their names and hit the Tab key. Available snippets:
 
 * `octclass` – A classdef class definition, in GNU Octave style
+* `octfun` - A function definition, in GNU Octave style
+  * This is a fixed-up version of the one found in Sublime Text’s Matlab package.
 * `unwind` – An `unwind_protect` block
 * `unwtry` – A combination `unwind_protect` + `try`/`catch` block 
 

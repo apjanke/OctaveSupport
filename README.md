@@ -1,9 +1,10 @@
-sublime-octave
-==============
+OctaveSupport for Sublime Text
+===============================
 
-Octave package for Sublime Text, providing syntax highlighting, indentation settings, and code snippets.
+OctaveSupport package for Sublime Text, providing syntax highlighting, indentation settings, and code snippets.
 
 I’m not really sure what I'm doing here, either with the package itself, or how to structure a Git repo for a redistributable Sublime package.
+I’m working on getting this into Package Control.
 
 ## Installation
 

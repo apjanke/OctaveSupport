@@ -1,5 +1,5 @@
 <snippet>
-	<content><![CDATA[## Copyright (C) ${TM_YEAR} $TM_FULLNAME
+  <content><![CDATA[## Copyright (C) ${TM_YEAR} $TM_FULLNAME
 ##
 ## This program is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -8,7 +8,7 @@
 ##
 ## This program is distributed in the hope that it will be useful,
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the
 ## GNU General Public License for more details.
 ##
 ## You should have received a copy of the GNU General Public License
@@ -22,26 +22,26 @@
 ##
 ## @end deftypefn
 
-## Author:  $TM_FULLNAME
+## Author:	$TM_FULLNAME
 
 classdef $1
 
-  properties
-    $0
-  endproperties
+	properties
+		$0
+	endproperties
 
-  methods
+	methods
 
-    function this = $1 ()
-      if nargin == 0
-        return
-      endif
-    endfunction
+		function this = $1 ()
+			if nargin == 0
+				return
+			endif
+		endfunction
 
-  endmethods
+	endmethods
 
 endclassdef]]></content>
-	<tabTrigger>octclass</tabTrigger>
-	<scope>source.matlab, source.octave</scope>
-	<description>Octave classdef</description>
+  <tabTrigger>octclass</tabTrigger>
+  <scope>source.matlab, source.octave</scope>
+  <description>Octave classdef</description>
 </snippet>

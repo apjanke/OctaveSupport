@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[unwind_protect
-		try
-			$1
-		catch
-			$2
-		end_try_catch
+	try
+		$1
+	catch
+		$2
+	end_try_catch
 unwind_protect_cleanup 
 	$0
 end_unwind_protect]]></content>

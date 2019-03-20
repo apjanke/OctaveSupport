@@ -1,7 +1,7 @@
 sublime-octave
 ==============
 
-Octave package for Sublime Text, providing syntax highlighting.
+Octave package for Sublime Text, providing syntax highlighting, indentation settings, and code snippets.
 
 I’m not really sure what I'm doing here, either with the package itself, or how to structure a Git repo for a redistributable Sublime package.
 
@@ -24,4 +24,14 @@ Once installed, there will be an “Octave” choice under the View > Syntax men
 Open an Octave `.m` file and select it.
 You may also want to do View > Syntax > "Open all with current extension as..." > Octave.
 
+### Snippets
 
+To use the code snippets, type one of their names and hit the Tab key. Available snippets:
+
+* `octclass` – A classdef class definition, in GNU Octave style
+* `unwind` – An `unwind_protect` block
+* `unwtry` – A combination `unwind_protect` + `try`/`catch` block 
+
+## TODO
+
+Check out https://github.com/evandrocoan/ITE - it has Octave syntax, but it’s done as an extension to Matlab.

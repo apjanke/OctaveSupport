@@ -1,0 +1,19 @@
+{
+	"scope": "source.octave",
+
+	"completions":
+	[
+		{ "trigger": "for", "contents": "for $0\nendfor"},
+		{ "trigger": "if",  "contents": "if ($0)\nendif"},
+		{ "trigger": "switch", "contents": "switch $0\n  case\n  otherwise\nendswitch"},
+		{ "trigger": "while", "contents": "while $0\nendwhile"},
+		{ "trigger": "function", "contents": "function $0\nendfunction"},
+		{ "trigger": "classdef", "contents": "classdef $0\n\n	properties\n	endproperties\n\n	methods\n\n	endmethods\n\nendclassdef\n"},
+		{ "trigger": "unwind_protect",
+		    "contents": "unwind_protect\n	$0\nunwind_protect_cleanup\nend_unwind_protect" },
+		{ "trigger": "unwind",
+		    "contents": "unwind_protect\n	$0\nunwind_protect_cleanup\nend_unwind_protect" },
+		{ "trigger": "try",
+		    "contents": "try\n	$0\ncatch\nend_try_catch"}
+	]
+}

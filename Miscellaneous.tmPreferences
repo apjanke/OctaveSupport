@@ -27,6 +27,10 @@
 				<string>"</string>
 				<string>"</string>
 			</array>
+			<array>
+				<string>'</string>
+				<string>'</string>
+			</array>
 		</array>
 		<key>increaseIndentPattern</key>
 		<string>^\s*\\begin\{.*\}</string>

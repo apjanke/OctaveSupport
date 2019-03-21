@@ -32,7 +32,7 @@ classdef ${TM_FILENAME/(.+)\..+|.*/$1/}
 
 	methods
 
-		function this = ${TM_FILENAME/(.+)\..+|.*/$1/} ()
+		function this = ${TM_FILENAME/(.+)\..+|.*/$1/} ($1)
 			if nargin == 0
 				return
 			endif

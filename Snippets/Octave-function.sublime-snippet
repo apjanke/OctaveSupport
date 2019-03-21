@@ -15,19 +15,17 @@
 ## along with this program; If not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Function File} {${1:Outputs} = } ${2:FunctionName} (${3:Input Arguments})
-## ${4:Short Description}
+## @deftypefn {Function File} {${1:Outputs} = } ${TM_FILENAME/(.+)\..+|.*/$1/} (${2:Input Arguments})
+## ${3:Short Description}
 ##
-## ${5:Long Description}
+## ${4:Long Description}
 ##
 ## @end deftypefn
 
 ## Author:  $TM_FULLNAME
 
-function $1 = ${2} (${3})
+function $1 = ${TM_FILENAME/(.+)\..+|.*/$1/} (${2})
 	$0
-endfunction
-
 endfunction
 ]]></content>
 	<tabTrigger>octfun</tabTrigger>

@@ -15,16 +15,16 @@
 ## along with this program; If not, see <http://www.gnu.org/licenses/>.
 
 ## -*- texinfo -*-
-## @deftypefn {Class Constructor} {obj = } ${1:ClassName} (${2:Input Arguments})
-## ${3:Short Description}
+## @deftypefn {Class Constructor} {obj = } ${TM_FILENAME/(.+)\..+|.*/$1/} (${1:Input Arguments})
+## ${2:Short Description}
 ##
-## ${4:Long Description}
+## ${3:Long Description}
 ##
 ## @end deftypefn
 
 ## Author:	$TM_FULLNAME
 
-classdef $1
+classdef ${TM_FILENAME/(.+)\..+|.*/$1/}
 
 	properties
 		$0
@@ -32,7 +32,7 @@ classdef $1
 
 	methods
 
-		function this = $1 ()
+		function this = ${TM_FILENAME/(.+)\..+|.*/$1/} ()
 			if nargin == 0
 				return
 			endif

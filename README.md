@@ -3,8 +3,9 @@ OctaveSupport for Sublime Text 3
 
 OctaveSupport package for Sublime Text, providing syntax highlighting, indentation settings, and code snippets.
 
-I’m not really sure what I'm doing here, either with the package itself, or how to structure a Git repo for a redistributable Sublime package.
-I’m working on [getting this into Package Control](https://github.com/wbond/package_control_channel/pull/7517).
+This is a work in progress: I’m new to writing Sublime Text extensions, so something may be off here.
+
+I’m working on [getting this into the Package Control main channel](https://github.com/wbond/package_control_channel/pull/7517).
 
 ## Installation
 

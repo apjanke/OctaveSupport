@@ -1,0 +1,6 @@
+<snippet>
+	<content><![CDATA[if nargin < $1 || isempty ($2); $2 = $3; endif]]></content>
+	<tabTrigger>farg</tabTrigger>
+	<scope>source.octave</scope>
+	<description>argument: if nargin &lt; n; &lt;arg> =  ... endif</description>
+</snippet>

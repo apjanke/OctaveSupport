@@ -10,6 +10,8 @@ I’m working on [getting this into Package Control](https://github.com/wbond/pa
 
 ### Installing with Package Control
 
+This is how most users should do it.
+
 * First, install [Package Control](https://packagecontrol.io/installation)
 * In Sublime Text, open the Command Palette (Cmd-Shift-P on Mac, Ctrl-Shift-P on Linux/Windows) and choose “Package Control: Add Repository”
 * Add `https://github.com/apjanke/OctaveSupport`
@@ -17,6 +19,8 @@ I’m working on [getting this into Package Control](https://github.com/wbond/pa
 * Select `OctaveSupport` from the package list
 
 ### Installing from GitHub repo
+
+This is how you should do it if you want to hack on OctaveSupport itself.
 
 * Clone the Git repo
   * `git clone https://github.com/apjanke/OctaveSupport`
@@ -42,9 +46,3 @@ To use the code snippets, type one of their names and hit the Tab key. Available
   * This is a fixed-up version of the one found in Sublime Text’s Matlab package.
 * `unwind` – An `unwind_protect` block
 * `unwtry` – A combination `unwind_protect` + `try`/`catch` block 
-
-## TODO
-
-Check out https://github.com/evandrocoan/ITE - it has Octave syntax, but it’s done as an extension to Matlab.
-
-Also check out https://github.com/tushortz/GNU-Octave-Completions, another Octave completions package.

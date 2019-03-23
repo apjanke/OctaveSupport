@@ -16,6 +16,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Class Constructor} {obj =} ${TM_FILENAME/(.+)\..+|.*/$1/} (${1:Input Arguments})
+##
 ## ${2:Short Description}
 ##
 ## ${3:Long Description}

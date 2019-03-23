@@ -16,6 +16,7 @@
 
 ## -*- texinfo -*-
 ## @deftypefn {Function File} {${1:Outputs} = } ${TM_FILENAME/(.+)\..+|.*/$1/} (${2:Input Arguments})
+##
 ## ${3:Short Description}
 ##
 ## ${4:Long Description}

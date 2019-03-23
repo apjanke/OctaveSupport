@@ -61,9 +61,7 @@ contexts:
     - include: octave_constant_language
     - include: octave_variable_function
     - include: octave_keyword_desktop
-    - include: octave_keyword_mathematics
     - include: octave_keyword_analysis
-    - include: octave_storage_control
     - include: octave_support_graphics
     - include: octave_support_function
     - include: octave_support_external
@@ -162,17 +160,13 @@ contexts:
       comment: Data Analysis
       scope: keyword.analysis.octave
   octave_keyword_control:
-    - match: \b(break|case|catch|continue|else|elseif|end|endclassdef|endfor|endenumeration|endevents|endfunction|endmethods|endproperties|endif|end_try_catch|end_unwind_protect|for|parfor|if|otherwise|pause|rethrow|return|start|startat|stop|switch|try|unwind_protect|unwind_protect_cleanup|wait|while)\b
+    - match: \b(break|case|catch|continue|else|elseif|end|endclassdef|endfor|endif|endenumeration|endevents|endfunction|endmethods|endproperties|endswitch|endwhile|end_try_catch|end_unwind_protect|for|parfor|if|otherwise|pause|rethrow|return|start|startat|stop|switch|try|unwind_protect|unwind_protect_cleanup|wait|while)\b
       comment: Control keywords
       scope: keyword.control.octave
   octave_keyword_desktop:
-    - match: \b(addpath|assignin|builddocsearchdb|cd|checkin|checkout|clc|clear|clipboard|cmopts|commandhistory|commandwindow|computer|copyfile|customverctrl|dbclear|dbcont|dbdown|dbquit|dbstack|dbstatus|dbstep|dbstop|dbtype|dbup|debug|demo|diary|dir|doc|docopt|docsearch|dos|echodemo|edit|exit|fileattrib|filebrowser|finish|format|genpath|getenv|grabcode|help|helpbrowser|helpwin|home|hostid|info|keyboard|license|lookfor|ls|octave|octaverc|octaveroot|memory|mkdir|mlint|mlintrpt|more|movefile|notebook|openvar|pack|partialpath|path|path2rc|pathdef|pathsep|pathtool|perl|playshow|prefdir|preferences|profile|profsave|publish|pwd|quit|recycle|rehash|restoredefaultpath|rmdir|rmpath|savepath|setenv|startup|support|system|toolboxdir|type|undocheckout|unix|ver|verctrl|verLessThan|version|web|what|whatsnew|which|winqueryreg|workspace)\b|(^\s*!.*$)
+    - match: \b(addpath|assignin|cd|clear|dbclear|dbcont|dbdown|dbquit|dbstack|dbstatus|dbstep|dbstop|dbtype|dbup|debug|exit|keyboard|quit)\b|(^\s*!.*$)
       comment: Desktop Tools and Development
       scope: keyword.desktop.octave
-  octave_keyword_mathematics:
-    - match: \b(accumarray|acos|acosd|acosh|acot|acotd|acoth|acsc|acscd|acsch|airy|amd|asec|asecd|asech|asin|asind|asinh|atan|atan2|atand|atanh|balance|besselh|besseli|besselj|besselk|bessely|beta|betainc|betaln|bicg|bicgstab|blkdiag|bsxfun|bvp4c|bvpget|bvpinit|bvpset|bvpxtend|cart2pol|cart2sph|cat|cdf2rdf|ceil|cgs|chol|cholinc|cholupdate|circshift|colamd|colperm|compan|complex|cond|condeig|condest|conj|convhull|convhulln|cos|cosd|cosh|cot|cotd|coth|cross|csc|cscd|csch|cumprod|cumsum|dblquad|dde23|ddeget|ddesd|ddeset|decic|det|deval|diag|disp|display|dmperm|dot|eig|eigs|ellipj|ellipke|erf|erfc|erfcinv|erfcx|erfinv|etree|etreeplot|exp|expint|expm|expm1|eye|factor|factorial|find|fix|flipdim|fliplr|flipud|floor|fminbnd|fminsearch|freqspace|full|funm|fzero|gallery|gamma|gammainc|gammaln|gcd|gmres|gplot|griddata|griddata3|griddatan|gsvd|hadamard|hankel|hess|hilb|horzcat|hypot|idivide|ilu|imag|ind2sub|Inf|inline|interp1|interp1q|interp2|interp3|interpft|interpn|inv|invhilb|ipermute|kron|lcm|ldl|legendre|length|linsolve|linspace|log|log10|log1p|log2|logm|logspace|lscov|lsqnonneg|lsqr|lu|luinc|magic|meshgrid|minres|mkpp|mod|NaN|nchoosek|ndgrid|ndims|nextpow2|nnz|nonzeros|norm|normest|nthroot|null|numel|nzmax|ode113|ode15i|ode15s|ode23|ode23s|ode23t|ode23tb|ode45|odefile|odeget|odeset|odextend|ones|optimget|optimset|ordeig|ordqz|ordschur|orth|pascal|pcg|pchip|pdepe|pdeval|perms|permute|pinv|planerot|pol2cart|poly|polyder|polyeig|polyfit|polyint|polyval|polyvalm|pow2|ppval|primes|prod|psi|qmr|qr|qrdelete|qrinsert|qrupdate|quad|quadl|quadv|qz|rand|randn|randperm|rank|rat|rats|rcond|real|reallog|realpow|realsqrt|rem|repmat|reshape|residue|roots|rosser|rot90|round|rref|rsf2csf|schur|sec|secd|sech|shiftdim|sign|sin|sind|sinh|size|sort|sortrows|spalloc|sparse|spaugment|spconvert|spdiags|speye|spfun|sph2cart|spline|spones|spparms|sprand|sprandn|sprandsym|sprank|spy|sqrt|sqrtm|squeeze|ss2tf|sub2ind|subspace|sum|svd|svds|symamd|symbfact|symmlq|symrcm|tan|tand|tanh|toeplitz|trace|treelayout|treeplot|tril|triplequad|triu|unmkpp|unwrap|vander|vectorize|vertcat|wilkinson|zeros)\b
-      comment: Mathematics
-      scope: keyword.mathematics.octave
   octave_keyword_operator:
     - match: \b(all|and|any|bitand|bitcmp|bitget|bitmax|bitor|bitset|bitshift|bitxor|eq|ge|gt|isa|isappdata|iscell|iscellstr|ischar|iscom|isdir|isempty|isequal|isequalwithequalnans|isevent|isfield|isfinite|isfloat|isglobal|ishandle|ishold|isinf|isinteger|isinterface|isjava|iskeyword|isletter|islogical|ismac|ismember|ismethod|isnan|isnumeric|isobject|ispc|ispref|isprime|isprop|isreal|isscalar|issorted|isspace|issparse|isstrprop|isstruct|isstudent|isunix|isvarname|isvector|le|lt|mislocked|or|ne|not|setxor|union|unique|xor)\b
       comment: Operator keywords
@@ -181,10 +175,6 @@ contexts:
     - match: \b(addOptional|addParamValue|addRequired|addtodate|arrayfun|assert|blanks|builtin|calendar|cell|celldisp|cellfun|cellplot|clock|cputime|createCopy|datatipinfo|date|datenum|datestr|datevec|dbmex|deal|deblank|depdir|depfun|echo|eomday|error|etime|eval|evalc|evalin|exist|feval|fieldnames|findstr|func2str|genvarname|getfield|global|inferiorto|inmem|intersect|intwarning|lasterr|lasterror|lastwarn|loadobj|lower|methods|methodsview|mex|mexext|mfilename|mlock|munlock|nargchk|nargoutchk|now|orderfields|parse|pcode|regexp|regexpi|regexprep|regexptranslate|rmfield|run|saveobj|setdiff|setfield|sprintf|sscanf|strcat|strcmp|strcmpi|strfind|strings|strjust|strmatch|strncmp|strncmpi|strread|strrep|strtok|strtrim|structfun|strvcat|subsasgn|subsindex|subsref|substruct|superiorto|swapbytes|symvar|tic|timer|timerfind|timerfindall|toc|typecast|upper|warning|weekday|who|whos)\b
       comment: Other keywords
       scope: keyword.other.octave
-  octave_storage_control:
-    - match: \b(addframe|ascii|audioplayer|audiorecorder|aufinfo|auread|auwrite|avifile|aviinfo|aviread|beep|binary|cdfepoch|cdfinfo|cdfread|cdfwrite|csvread|csvwrite|daqread|dlmread|dlmwrite|exifread|feof|ferror|fgetl|fgets|filehandle|filemarker|fileparts|filesep|fitsinfo|fitsread|fopen|fprintf|fread|frewind|fscanf|fseek|ftell|ftp|fullfile|fwrite|gunzip|gzip|hdf|hdf5|hdf5info|hdf5read|hdf5write|hdfinfo|hdfread|hdftool|imfinfo|importdata|imread|imwrite|lin2mu|load|memmapfile|mget|mmfileinfo|movie2avi|mput|mu2lin|multibandread|multibandwrite|open|rename|save|sendmail|sound|soundsc|tar|tempdir|tempname|textread|textscan|todatenum|uiimport|untar|unzip|urlread|urlwrite|wavfinfo|wavplay|wavread|wavrecord|wavwrite|winopen|wk1finfo|wk1read|wk1write|xlsfinfo|xlsread|xlswrite|xmlread|xmlwrite|xslt|zip)\b
-      comment: File I/O
-      scope: storage.control.octave
   octave_storage_modifier:
     - match: \b(base2dec|bin2dec|cast|cell2mat|cell2struct|cellstr|char|dec2base|dec2bin|dec2hex|hex2dec|hex2num|int2str|mat2cell|mat2str|num2cell|native2unicode|num2hex|num2str|persistent|str2double|str2func|str2mat|str2num|struct2cell|unicode2native)\b
       comment: Storage modifiers
